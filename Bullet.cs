@@ -4,12 +4,28 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public GameObject bullet;
+    public Rigidbody2D bulletRigid; 
 
-    public Rigidbody2D bullet; 
     public float moveSpeed;
+    public int bulletDamage = 1;
+
+    public int GetBulletDamage() {
+        return bulletDamage;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) { 
+        if (collision.gameObject.tag == "Circle") {
+            Destroy(bullet);
+        }
+        
+        // if (collision.gameObject.tag == "")
+    }
+
     // Start is called before the first frame update
     void Start() {
-        bullet.velocity = new Vector3(0, moveSpeed, 0);
+        bullet.tag = "Projectile";
+        bulletRigid.velocity = new Vector3(0, moveSpeed, 0);
     }
 
     // Update is called once per frame

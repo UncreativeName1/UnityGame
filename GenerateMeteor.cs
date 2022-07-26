@@ -7,7 +7,7 @@ public class GenerateMeteor : MonoBehaviour {
     System.Random rnd = new System.Random();
     int counter = 0;
     double random;
-    double meteorSpawnFrequency = 0.5; // between 0 and 1000
+    double meteorSpawnFrequency = 2; // between 0 and 100
     int maxMeteors = 10;
     float spawnRadius = 300f;
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class GenerateMeteor : MonoBehaviour {
     void Update()
     {
         random = rnd.NextDouble();
-        if (random < meteorSpawnFrequency / 1000) {
+        if (random < meteorSpawnFrequency / 10000) {
             if (counter < maxMeteors) {
                 float factor = ((float)rnd.NextDouble() - 0.5f) * 2 * spawnRadius;
                 // meteor.GetComponent<Meteor>().RandomHealth();

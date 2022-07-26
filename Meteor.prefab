@@ -207,7 +207,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1000000
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 30
@@ -252,8 +252,8 @@ MonoBehaviour:
   squareCollider: {fileID: 5532262291294895675, guid: f8741dd7510834fe59aa39c48d9da05a, type: 3}
   player: {fileID: 7627684391548003316, guid: 519846c5d40bc44b9b7c4f27f8539a77, type: 3}
   playerCollider: {fileID: 7627684391548003315, guid: 519846c5d40bc44b9b7c4f27f8539a77, type: 3}
+  bullet: {fileID: 3602135163895238070, guid: 617919497daa747ff98c47d7a8698a6d, type: 3}
   maxHealth: 0
-  meteorHealth: 0
   meteorHealthDisplay: {fileID: 7220742258848002009}
 --- !u!222 &5351237773343135064
 CanvasRenderer:

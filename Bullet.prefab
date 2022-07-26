@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4783651520034204585}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,14 +95,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3602135163895238070}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -120,8 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f729441c49404d849aeb9aa8c8eb747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2736860341189132860}
-  moveSpeed: 150
+  bullet: {fileID: 3602135163895238070}
+  bulletRigid: {fileID: 2736860341189132860}
+  moveSpeed: 3000
+  bulletDamage: 1
 --- !u!58 &4783651520034204585
 CircleCollider2D:
   m_ObjectHideFlags: 0

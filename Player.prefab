@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7627684391548003316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.07, y: -2.06, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.052064814, g: 0.8490566, b: 0.19648507, a: 1}
+  m_Color: {r: 0.56287825, g: 0.8584906, b: 0.61649424, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,9 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7627684391548003316}
   projectile: {fileID: 3602135163895238070, guid: 617919497daa747ff98c47d7a8698a6d, type: 3}
-  moveSpeed: 5
-  startingHealth: 0
+  moveSpeed: 150
+  maxHealth: 100
+  playerHealth: 100
   fireSpeed: 0.2
-  healthSlider: {fileID: 0}
-  health: {fileID: 0}
-  healthDisplay: {fileID: 0}
