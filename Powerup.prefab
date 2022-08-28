@@ -31,13 +31,13 @@ RectTransform:
   m_LocalScale: {x: 0.03333333, y: 0.03333333, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3473811446091811237}
+  - {fileID: 5872558535246744503}
   m_Father: {fileID: 2783377297180452522}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.537, y: 0.371}
+  m_AnchoredPosition: {x: 0.52, y: 0.371}
   m_SizeDelta: {x: 692, y: 382}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8967996507379647875
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!1 &4783925026902131548
+--- !u!1 &5847703617750361598
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,23 +109,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3473811446091811237}
-  - component: {fileID: 3571484381496624082}
-  - component: {fileID: 5508027221669112217}
+  - component: {fileID: 5872558535246744503}
+  - component: {fileID: 4640428760994146744}
+  - component: {fileID: 7925143517952488881}
   m_Layer: 0
-  m_Name: MeteorImage
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3473811446091811237
+--- !u!224 &5872558535246744503
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4783925026902131548}
+  m_GameObject: {fileID: 5847703617750361598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -136,24 +136,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.2, y: -21.7}
-  m_SizeDelta: {x: 65.4, y: 102.6}
+  m_AnchoredPosition: {x: -0.6, y: 3.9}
+  m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3571484381496624082
+--- !u!222 &4640428760994146744
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4783925026902131548}
+  m_GameObject: {fileID: 5847703617750361598}
   m_CullTransparentMesh: 1
---- !u!114 &5508027221669112217
+--- !u!114 &7925143517952488881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4783925026902131548}
+  m_GameObject: {fileID: 5847703617750361598}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5ecceb78d73d54ea88a29c417bc2888d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c7a6f6e731de44de1ba458a2a766fe08, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -189,11 +189,11 @@ GameObject:
   - component: {fileID: 8555263630073636986}
   - component: {fileID: 4363705346352822633}
   - component: {fileID: 2665368246490115793}
-  - component: {fileID: -2677500525565998204}
   - component: {fileID: 5351237773343135064}
+  - component: {fileID: -3742985506591829581}
   m_Layer: 0
-  m_Name: Bullet
-  m_TagString: Projectile
+  m_Name: Powerup
+  m_TagString: Circle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +207,7 @@ RectTransform:
   m_GameObject: {fileID: 6300652120958132629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 30, y: 30, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6268182392069336830}
@@ -216,7 +216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 23.61002, y: 61.66422}
+  m_AnchoredPosition: {x: 758, y: 347}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &8555263630073636986
@@ -260,8 +260,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.05490196, g: 0.8117647, b: 0.8862745, a: 1}
+  m_Sprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
+  m_Color: {r: 0.19430852, g: 1, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -287,7 +287,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bcbc6ee1652e846f1bb605be00b60776, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -308,24 +308,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-2677500525565998204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6300652120958132629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f729441c49404d849aeb9aa8c8eb747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 6300652120958132629}
-  bulletRigid: {fileID: 4363705346352822633}
-  moveSpeed: 2300
-  bulletDamage: 1
-  heightLimit: 300
-  setImage: {fileID: 5508027221669112217}
 --- !u!222 &5351237773343135064
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -334,3 +316,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6300652120958132629}
   m_CullTransparentMesh: 1
+--- !u!114 &-3742985506591829581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6300652120958132629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcffa746dda4447e3a55c789726eeafd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerup: {fileID: 6300652120958132629}
+  powerupRigid: {fileID: 4363705346352822633}
+  powerupCollider: {fileID: 2665368246490115793}
+  player: {fileID: 7627684391548003316, guid: 519846c5d40bc44b9b7c4f27f8539a77, type: 3}
+  fallSpeed: -50
+  powerupIndex: 0
+  icon: {fileID: 7925143517952488881}

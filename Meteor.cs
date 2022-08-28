@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
  
 public class Meteor : MonoBehaviour
@@ -18,20 +19,28 @@ public class Meteor : MonoBehaviour
 
     public GameObject bullet;
 
+    public Image setImage;
+
+    // MOVEMENT
     float bounceYVelocity = 0;
     float bounceVariability = 150; // randomness of x velocity change when bouncing
     float splitVariability = 50; // minimum magnitude of x velocity upon separation
     float gravity = 9.806f;
     float bounceHeight = 180;
+    public int primeBounces;
 
-    int primeBounces = 4;
-
+    // SPLIT
     Dictionary<int, List<Tuple<int, int>>> factors = new Dictionary<int, List<Tuple<int, int>>>() {};
 
-    float startingUpperbound = 12f;
+    // HEALTH
     public int maxHealth;
     int meteorHealth;
     public TMP_Text meteorHealthDisplay;
+    public float minSize;
+    public float maxSize;
+
+    public int meteorLimitTime; // time until meteors cap out
+
 
     System.Random rnd = new System.Random();
 
@@ -41,7 +50,13 @@ public class Meteor : MonoBehaviour
         // Debug.Log(circleCollider.GetInstanceID());
 
         if (collision.gameObject.tag == "player") {
-            player.GetComponent<Player>().TakeDamage(maxHealth);
+            // if player is shielded, shield takes dmg
+            if (player.GetComponent<Player>().shieldHealth > 0) {
+                player.GetComponent<Player>().DamageShield(maxHealth);
+            } else {
+                player.GetComponent<Player>().TakeDamage(maxHealth);
+            }
+            
             if (IsPrime(maxHealth)) {
                 primeBounces--;
                 if (primeBounces <= 0) {
@@ -54,6 +69,10 @@ public class Meteor : MonoBehaviour
         if (collision.gameObject.tag == "Circle") {
             Physics2D.IgnoreCollision(circleCollider, collision.gameObject.GetComponent<Collider2D>());
             // Debug.Log("circle collide");
+        }
+
+        if (collision.gameObject.tag == "Powerup") {
+            Physics2D.IgnoreCollision(circleCollider, collision.gameObject.GetComponent<Collider2D>());
         }
 
         if (collision.gameObject.tag == "Square") {
@@ -74,12 +93,17 @@ public class Meteor : MonoBehaviour
         }
 
         if (collision.gameObject.tag == "Projectile") {
-            meteorHealth -= bullet.GetComponent<Bullet>().GetBulletDamage();
+            meteorHealth -= collision.gameObject.GetComponent<Bullet>().GetBulletDamage();
             //SetHealthText();
 
             if (IsPrime(maxHealth)) {
                 Debug.Log("DESTROYED PRIME");
-                player.GetComponent<Player>().TakeDamage(maxHealth);
+                // if player has shield
+                if (player.GetComponent<Player>().shieldHealth > 0) {
+                    player.GetComponent<Player>().DamageShield(maxHealth);
+                } else {
+                    player.GetComponent<Player>().TakeDamage(maxHealth);
+                }
                 Destroy(circle);
             } else if (meteorHealth <= 0) {
                 // splitting nonprime meteor
@@ -93,22 +117,6 @@ public class Meteor : MonoBehaviour
     }
 
     void Split(int splitHealth1, int splitHealth2) {
-        // create split meteor
-        GameObject split1 = Instantiate(circle, new Vector3(circle.transform.position.x, circle.transform.position.y, 0), Quaternion.identity);
-        // set max health of meteor
-        split1.GetComponent<Meteor>().maxHealth = splitHealth1;
-        // set current health of meteor
-        split1.GetComponent<Meteor>().SetCurrentHealth();
-        // bounce meteor
-        split1.GetComponent<Meteor>().Bounce();
-
-        // same thing with other meteor
-        GameObject split2 = Instantiate(circle, new Vector3(circle.transform.position.x, circle.transform.position.y, 0), Quaternion.identity);
-        split2.GetComponent<Meteor>().maxHealth = splitHealth2;
-        split2.GetComponent<Meteor>().SetCurrentHealth();
-        split2.GetComponent<Meteor>().Bounce();
-
-
         // make sure they split in oppposite directions
         float XSpeed1 = (float)rnd.NextDouble() * bounceVariability + splitVariability;
         float XSpeed2 = -(float)rnd.NextDouble() * bounceVariability + splitVariability;
@@ -117,13 +125,43 @@ public class Meteor : MonoBehaviour
             XSpeed2 *= -1;
         }
         CalculateBounceVelocity(circle.transform.position.y);
+
+        // create split meteor
+        GameObject split1 = Instantiate(circle, new Vector3(circle.transform.position.x, circle.transform.position.y, 0), Quaternion.identity);
+        // set max health of meteor
+        split1.GetComponent<Meteor>().maxHealth = splitHealth1;
+        // set current health of meteor
+        split1.GetComponent<Meteor>().SetCurrentHealth();
+        // set split velocity
         split1.GetComponent<Meteor>().circleRigid.velocity = new Vector2(XSpeed1, bounceYVelocity);
+
+        // same thing with other meteor
+        GameObject split2 = Instantiate(circle, new Vector3(circle.transform.position.x, circle.transform.position.y, 0), Quaternion.identity);
+        split2.GetComponent<Meteor>().maxHealth = splitHealth2;
+        split2.GetComponent<Meteor>().SetCurrentHealth();
         split2.GetComponent<Meteor>().circleRigid.velocity = new Vector2(XSpeed2, bounceYVelocity);
     }
 
-    void RandomHealth(float modifier) {
-        float upperbound = startingUpperbound + modifier;
-        maxHealth = rnd.Next(2, (int)Math.Floor(upperbound) + 1);
+    int MinimumHealth(float x) {
+        x = (float)(50 * Math.Log10((double)x + 70) - 90.24);
+        return (int)x;
+    }
+
+    int MaximumHealth(float x) {
+        x = (float)(80 * Math.Log10((double)x + 50) - 125.90);
+        return (int)x;
+    }
+
+    void RandomHealth() {
+        float timeInput = Time.time;
+        // if past meteor health cap time
+        if (Time.time > meteorLimitTime) {
+            timeInput =  meteorLimitTime;
+        }
+        int lowerbound = MinimumHealth(timeInput);
+        int upperbound = MaximumHealth(timeInput);
+        Debug.Log(lowerbound + " " + upperbound);
+        maxHealth = rnd.Next(lowerbound, upperbound + 1);
         SetCurrentHealth();
     }
 
@@ -172,9 +210,6 @@ public class Meteor : MonoBehaviour
         var temp = new Tuple<int, int>(number, number);
         if (IsPrime(number)) return temp;
 
-        // Debug.Log("000000");
-        // Debug.Log(factors.ContainsKey(number));
-        // Debug.Log("111111");
         if (!factors.ContainsKey(number)) {
             GenerateAllFactorPairs(number);
         }
@@ -188,12 +223,6 @@ public class Meteor : MonoBehaviour
         CalculateBounceVelocity(circle.transform.position.y);
         // Debug.Log("BOUNCE Y:" + bounceYVelocity);
         float factor = ((float)rnd.NextDouble() - 0.5f) * 2 * bounceVariability;
-        // if (rnd.Next(0,2) == 1) {
-        //     circleRigid.velocity = new Vector2((float)rnd.NextDouble() * -bounceVariability, bounceYVelocity);
-        // }
-        // else {
-        //     circleRigid.velocity = new Vector2((float)rnd.NextDouble() * bounceVariability, bounceYVelocity);
-        // }
         circleRigid.velocity = new Vector2(factor, bounceYVelocity);
     }
 
@@ -217,27 +246,32 @@ public class Meteor : MonoBehaviour
         meteorHealthDisplay.text = meteorHealth.ToString() + "/" + maxHealth.ToString();
     }
 
+    float CalculateSize() {
+        // implements function 0.5x - 1 as bonus scale
+        float size = (float)maxHealth * 0.5f + minSize - 1;
+        if (size > maxSize) size = maxSize;
+        return size;
+    }
+
+    void SetSize() {
+        float size = CalculateSize();
+        circle.transform.localScale = new Vector3(size, size, 1);
+    }
+
     void Awake() {
-        // feed this parameter from GenerateMeteor.cs
-        RandomHealth(0);
-        maxHealth = meteorHealth;
+        RandomHealth();
     }
 
     // Start is called before the first frame update
     void Start() {
         gravity *= circleRigid.gravityScale;
-        circleCollider.tag = "Circle";
-        squareCollider.tag = "Square";
-        playerCollider.tag = "player";
-        // Debug.Log(circle.transform.position.y);
-        // CalculateBounceVelocity(circle.transform.position.y);
-        // Debug.Log("Final Velocity is: " + bounceYVelocity);
     }
 
     // Update is called once per frame
     void Update() {
         Ignore("Circle");
         SetHealthText();
+        SetSize();
     }
 }
 

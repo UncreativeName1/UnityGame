@@ -137,8 +137,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 7627684391548003316}
-  projectile: {fileID: 3602135163895238070, guid: 617919497daa747ff98c47d7a8698a6d, type: 3}
-  moveSpeed: 150
+  projectile: {fileID: 6300652120958132629, guid: 52ebf2cca17e944f6b7992d1656a56f6, type: 3}
+  moveSpeed: 175
   maxHealth: 100
-  playerHealth: 100
-  fireSpeed: 0.2
+  playerHealth: 94
+  regenerationAmount: 0
+  regenerationInterval: 1
+  fireSpeed: 10
+  maxShieldHealth: 50
+  shieldHealth: 11
+  isInvincible: 0
+  powerupStacking: 0
+  powerupTimers:
+  - 0
+  - 32.92
+  - 38
+  - 1000018.44
+  - 0
+  - 0
+  - 0
+  powerupIcons:
+  - {fileID: 21300000, guid: 28058a630d48c4faa9b4ca821c0d6d8b, type: 3}
+  - {fileID: 21300000, guid: 7336d7813a63c40b5b7cfbd876ae576b, type: 3}
+  - {fileID: 21300000, guid: bed5f8a2e5f40479a862d15e69495e04, type: 3}
+  - {fileID: 21300000, guid: 2f5d70d84ed5a40d7a0223bd15f884a4, type: 3}
+  - {fileID: 21300000, guid: 814fd25dcaed74401b12561481aa0d55, type: 3}
+  - {fileID: 21300000, guid: af4678a2f906b49768a3ab056af5c16f, type: 3}
+  - {fileID: 21300000, guid: 1f0ead1d0d66241b3805a6a9a13eaf69, type: 3}
+  playerSkin: {fileID: 0}
+  bulletSkin: {fileID: 21300000, guid: 5ecceb78d73d54ea88a29c417bc2888d, type: 3}
